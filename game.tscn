@@ -1,13 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl0fmagow4tl5"]
+[gd_scene load_steps=6 format=3 uid="uid://dl0fmagow4tl5"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_52slq"]
+[ext_resource type="Texture2D" uid="uid://b0c3acl2ux76k" path="res://art/player.png" id="2_4ueq6"]
+[ext_resource type="Script" path="res://player.gd" id="3_ssto3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67u32"]
+size = Vector2(15, 6)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_isj88"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_52slq")
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(320, 416)
+motion_mode = 1
+script = ExtResource("3_ssto3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-0.5, 5)
+shape = SubResource("RectangleShape2D_67u32")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_4ueq6")
 
 [node name="Enemy01" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_isj88")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 240)
