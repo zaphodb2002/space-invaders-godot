@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl0fmagow4tl5"]
+[gd_scene load_steps=3 format=3 uid="uid://dl0fmagow4tl5"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_52slq"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_isj88"]
+
 [node name="Game" type="Node"]
 script = ExtResource("1_52slq")
+
+[node name="Player" type="Sprite2D" parent="."]
+
+[node name="Enemy01" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_isj88")
