@@ -1,13 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl0fmagow4tl5"]
+[gd_scene load_steps=8 format=3 uid="uid://dl0fmagow4tl5"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_52slq"]
 [ext_resource type="Texture2D" uid="uid://b0c3acl2ux76k" path="res://art/player.png" id="2_4ueq6"]
 [ext_resource type="Script" path="res://player.gd" id="3_ssto3"]
+[ext_resource type="Texture2D" uid="uid://bsca2t4kb5e1c" path="res://art/enemy01.png" id="4_hwdx8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67u32"]
 size = Vector2(15, 6)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_isj88"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxrd0"]
+size = Vector2(11, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jubam"]
+size = Vector2(2, 480)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_52slq")
@@ -24,8 +29,31 @@ shape = SubResource("RectangleShape2D_67u32")
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("2_4ueq6")
 
-[node name="Enemy01" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_isj88")
+[node name="Enemy01" type="CharacterBody2D" parent="."]
+position = Vector2(83, 54)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy01"]
+texture = ExtResource("4_hwdx8")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy01"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_rxrd0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(320, 240)
+zoom = Vector2(0.8, 0.8)
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(0, 480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(0, -240)
+shape = SubResource("RectangleShape2D_jubam")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(640, 480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(0, -240)
+shape = SubResource("RectangleShape2D_jubam")
