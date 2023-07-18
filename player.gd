@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var bullet_scene : PackedScene
+
 var speed = 50
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +26,10 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
-		print("shoot")
+		shoot()
 	if event.is_action_pressed("ui_cancel"):
 		print("Quitting...")
 		get_tree().quit()
+
+func shoot():
+	add_child(bullet_scene.instantiate())

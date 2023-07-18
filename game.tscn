@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dl0fmagow4tl5"]
+[gd_scene load_steps=10 format=3 uid="uid://dl0fmagow4tl5"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_52slq"]
 [ext_resource type="Texture2D" uid="uid://b0c3acl2ux76k" path="res://art/player.png" id="2_4ueq6"]
+[ext_resource type="PackedScene" uid="uid://rmxe16gx5633" path="res://bullet.tscn" id="3_5o0at"]
 [ext_resource type="Script" path="res://player.gd" id="3_ssto3"]
 [ext_resource type="Texture2D" uid="uid://bsca2t4kb5e1c" path="res://art/enemy01.png" id="4_hwdx8"]
+[ext_resource type="Texture2D" uid="uid://c5qp2us3rs7q1" path="res://art/wall01.png" id="5_snhnt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67u32"]
 size = Vector2(15, 6)
@@ -11,16 +13,17 @@ size = Vector2(15, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxrd0"]
 size = Vector2(11, 8)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jubam"]
-size = Vector2(2, 480)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4k3qq"]
+size = Vector2(2, 240)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_52slq")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(320, 416)
+position = Vector2(160, 208)
 motion_mode = 1
 script = ExtResource("3_ssto3")
+bullet_scene = ExtResource("3_5o0at")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-0.5, 5)
@@ -41,19 +44,48 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_rxrd0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(320, 240)
-zoom = Vector2(0.8, 0.8)
+position = Vector2(160, 120)
 
-[node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2(0, 480)
+[node name="WallLeft" type="StaticBody2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 120)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(0, -240)
-shape = SubResource("RectangleShape2D_jubam")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+shape = SubResource("RectangleShape2D_4k3qq")
 
-[node name="Wall2" type="StaticBody2D" parent="."]
-position = Vector2(640, 480)
+[node name="Sprite2D" type="Sprite2D" parent="WallLeft"]
+texture = ExtResource("5_snhnt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
-position = Vector2(0, -240)
-shape = SubResource("RectangleShape2D_jubam")
+[node name="WallRight" type="StaticBody2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(320, 120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+shape = SubResource("RectangleShape2D_4k3qq")
+
+[node name="Sprite2D" type="Sprite2D" parent="WallRight"]
+texture = ExtResource("5_snhnt")
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+modulate = Color(0.4416, 0.92, 0.322, 1)
+position = Vector2(160, 0)
+rotation = 1.5708
+scale = Vector2(1.35, 1.35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("RectangleShape2D_4k3qq")
+
+[node name="Sprite2D" type="Sprite2D" parent="WallTop"]
+texture = ExtResource("5_snhnt")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+modulate = Color(0.4416, 0.92, 0.322, 1)
+position = Vector2(160, 240)
+rotation = 1.5708
+scale = Vector2(1.35, 1.35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+shape = SubResource("RectangleShape2D_4k3qq")
+
+[node name="Sprite2D" type="Sprite2D" parent="WallBottom"]
+texture = ExtResource("5_snhnt")
