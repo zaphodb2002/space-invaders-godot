@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cas37tn0d84vn"]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_ftlki"]
+[ext_resource type="Texture2D" uid="uid://bsca2t4kb5e1c" path="res://art/enemy01.png" id="2_r1h4g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxrd0"]
+size = Vector2(11, 8)
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 8
+collision_mask = 17
+script = ExtResource("1_ftlki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
+texture = ExtResource("2_r1h4g")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.5, 0)
+shape = SubResource("RectangleShape2D_rxrd0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

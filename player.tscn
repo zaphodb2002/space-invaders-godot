@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d10yparbhy7r6"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_ojb7d"]
+[ext_resource type="PackedScene" uid="uid://rmxe16gx5633" path="res://bullet.tscn" id="2_o4855"]
+[ext_resource type="Texture2D" uid="uid://b0c3acl2ux76k" path="res://art/player.png" id="3_2sfrx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67u32"]
+size = Vector2(15, 6)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(160, 208)
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_ojb7d")
+bullet_scene = ExtResource("2_o4855")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 5)
+shape = SubResource("RectangleShape2D_67u32")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_2sfrx")
+
+[node name="Shooting Cooldown" type="Timer" parent="."]
+one_shot = true
