@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var bullet_scene : PackedScene
 
+@onready var shooting_cooldown = get_node("Shooting Cooldown")
+
 var speed = 50
 
 # Called when the node enters the scene tree for the first time.
@@ -32,4 +34,6 @@ func _input(event):
 		get_tree().quit()
 
 func shoot():
-	add_child(bullet_scene.instantiate())
+	if shooting_cooldown.is_stopped():
+		add_child(bullet_scene.instantiate())
+		shooting_cooldown.start()
